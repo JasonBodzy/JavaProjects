@@ -4,32 +4,32 @@ public class calculator {
 
     public static void main(String[] args){
 
-        boolean first = true;
-        while(true){
+        boolean first = true; //Varaible to determine if it is the first equation
+        while(true){ //main loop
 
             try{
-                Scanner s = new Scanner(System.in);
+                Scanner s = new Scanner(System.in); //initializes scanner
 
-                if(!first) {
+                if(!first) { //If it isnt the first equation
                     System.out.println("Type exit to exit, press enter to continue");
                     String answer = s.nextLine();
                     if (answer.equals("exit")) {
-                        break;
+                        break; //exits program
                     }
                 }
 
 
                 System.out.println("Please enter a Number");
-                float firstNumber = s.nextFloat();
+                float firstNumber = s.nextFloat();//stores first
                 s.nextLine();
                 System.out.println("Please enter another number");
-                float secondNumber = s.nextFloat();
+                float secondNumber = s.nextFloat();//stores second
                 s.nextLine();
                 System.out.println("Please enter an operation");
-                String operation = s.nextLine();
+                String operation = s.nextLine(); //stores op
                 first = false;
 
-                switch (operation) {
+                switch (operation) { //basic operations
                     case "+":
                         System.out.println(firstNumber + secondNumber);
                         break;
@@ -46,6 +46,9 @@ public class calculator {
                     case "*":
                         System.out.println(firstNumber * secondNumber);
                         break;
+                    case "%":
+                        System.out.println(firstNumber % secondNumber);
+                        break;
                     default:
                         System.out.println("Invalid operation!");
                         break;
@@ -55,7 +58,7 @@ public class calculator {
 
                 }
             } catch (java.util.InputMismatchException e){
-                System.out.println("Invalid Input");
+                System.out.println("Invalid Input"); //if something else is entered
             }
 
 
