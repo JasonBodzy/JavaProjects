@@ -20,14 +20,22 @@ public class calculator {
 
 
                 System.out.println("Please enter a Number");
-                float firstNumber = s.nextFloat();//stores first
+                double firstNumber = s.nextDouble();//stores first
                 s.nextLine();
                 System.out.println("Please enter another number");
-                float secondNumber = s.nextFloat();//stores second
+                double secondNumber = s.nextDouble();//stores second
                 s.nextLine();
                 System.out.println("Please enter an operation");
                 String operation = s.nextLine(); //stores op
                 first = false;
+
+                if(firstNumber == 3.14){
+                    firstNumber = Math.PI;
+                }
+
+                if(secondNumber == 3.14){
+                    secondNumber = Math.PI;
+                }
 
                 switch (operation) { //basic operations
                     case "+":
