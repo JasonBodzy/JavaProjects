@@ -31,7 +31,8 @@ public class TimeConverter {
     }
 
     public static void main(String[] args) {
-        System.out.println(timeConversion("12:12:02AM"));
+        String input = "12:12:02AM";
+        System.out.println(timeConversion(input));
     }
 
 
