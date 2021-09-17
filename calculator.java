@@ -4,13 +4,13 @@ public class calculator {
 
     public static void main(String[] args){
 
-        boolean first = true; //Varaible to determine if it is the first equation
+        boolean first = true; //Variable to determine if it is the first equation
         while(true){ //main loop
 
             try{
                 Scanner s = new Scanner(System.in); //initializes scanner
 
-                if(!first) { //If it isnt the first equation
+                if(!first) { //If it isn't the first equation
                     System.out.println("Type exit to exit, press enter to continue");
                     String answer = s.nextLine();
                     if (answer.equals("exit")) {
@@ -37,6 +37,8 @@ public class calculator {
                     secondNumber = Math.PI;
                 }
 
+
+
                 switch (operation) { //basic operations
                     case "+":
                         System.out.println(firstNumber + secondNumber);
@@ -57,6 +59,9 @@ public class calculator {
                     case "%":
                         System.out.println(firstNumber % secondNumber);
                         break;
+                    case "^":
+                        System.out.println(Math.pow(firstNumber, secondNumber));
+                        break;
                     default:
                         System.out.println("Invalid operation!");
                         break;
@@ -68,9 +73,6 @@ public class calculator {
             } catch (java.util.InputMismatchException e){
                 System.out.println("Invalid Input"); //if something else is entered
             }
-
-
-
 
 
         }
