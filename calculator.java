@@ -31,14 +31,18 @@ public class calculator {
                 double secondDouble;
 
 
-                if(firstNumber.equals("pi")){
+                if(firstNumber.toLowerCase().equals("pi")){
                     firstDouble = Math.PI;
+                } else if (firstNumber.toLowerCase().equals(("e"))){
+                    firstDouble = Math.E;
                 } else {
                     firstDouble = Double.parseDouble(firstNumber);
                 }
 
                 if(secondNumber.toLowerCase().equals("pi")){
                     secondDouble = Math.PI;
+                } else if (secondNumber.toLowerCase().equals("e")) {
+                    secondDouble = Math.E;
                 } else {
                     secondDouble = Double.parseDouble(secondNumber);
                 }
