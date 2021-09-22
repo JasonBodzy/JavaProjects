@@ -20,47 +20,53 @@ public class calculator {
 
 
                 System.out.println("Please enter a Number");
-                double firstNumber = s.nextDouble();//stores first
-                s.nextLine();
+                String firstNumber = s.nextLine();//stores first
                 System.out.println("Please enter another number");
-                double secondNumber = s.nextDouble();//stores second
-                s.nextLine();
+                String secondNumber = s.nextLine();//stores second
                 System.out.println("Please enter an operation");
                 String operation = s.nextLine(); //stores op
                 first = false;
 
-                if(firstNumber == 3.14){
-                    firstNumber = Math.PI;
+                double firstDouble;
+                double secondDouble;
+
+
+                if(firstNumber.equals("pi")){
+                    firstDouble = Math.PI;
+                } else {
+                    firstDouble = Double.parseDouble(firstNumber);
                 }
 
-                if(secondNumber == 3.14){
-                    secondNumber = Math.PI;
+                if(secondNumber.toLowerCase().equals("pi")){
+                    secondDouble = Math.PI;
+                } else {
+                    secondDouble = Double.parseDouble(secondNumber);
                 }
 
 
 
                 switch (operation) { //basic operations
                     case "+":
-                        System.out.println(firstNumber + secondNumber);
+                        System.out.println(firstDouble + secondDouble);
                         break;
                     case "-":
-                        System.out.println(firstNumber - secondNumber);
+                        System.out.println(firstDouble - secondDouble);
                         break;
                     case "/":
-                        if(secondNumber != 0) {
-                            System.out.println(firstNumber / secondNumber);
+                        if(secondDouble != 0) {
+                            System.out.println(firstDouble / secondDouble);
                         }else {
                             System.out.println("Error, cannot divide by 0");
                         }
                         break;
                     case "*":
-                        System.out.println(firstNumber * secondNumber);
+                        System.out.println(firstDouble * secondDouble);
                         break;
                     case "%":
-                        System.out.println(firstNumber % secondNumber);
+                        System.out.println(firstDouble % secondDouble);
                         break;
                     case "^":
-                        System.out.println(Math.pow(firstNumber, secondNumber));
+                        System.out.println(Math.pow(firstDouble, secondDouble));
                         break;
                     default:
                         System.out.println("Invalid operation!");
