@@ -30,7 +30,7 @@ public class calculator {
                 double firstDouble;
                 double secondDouble;
 
-
+                //checks for valid String input for char 1
                 if(firstNumber.toLowerCase().equals("pi")){
                     firstDouble = Math.PI;
                 } else if (firstNumber.toLowerCase().equals(("e"))){
@@ -39,6 +39,7 @@ public class calculator {
                     firstDouble = Double.parseDouble(firstNumber);
                 }
 
+                //checks for valid String input for char 1
                 if(secondNumber.toLowerCase().equals("pi")){
                     secondDouble = Math.PI;
                 } else if (secondNumber.toLowerCase().equals("e")) {
