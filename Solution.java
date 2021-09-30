@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+//Combines and Separates varaible names, method names, and class names to and from strings.
+
 public class Solution {
 
     String convertString(String input){
