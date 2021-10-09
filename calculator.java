@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+//TODO
+//Derivatves
+//GUI
+//Graphing
+//Factoring
+
 public class calculator {
 
     public static void main(String[] args){
