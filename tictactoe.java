@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+//Text based tic tac toe game by Jason Bodzy
+
 public class tictactoe {
     tictactoe(){
 
