@@ -4,6 +4,7 @@ public class BubbleSort {
 
     }
 
+    //returns sorted integer array as a string
     String sort(int[] input){
         Sorter sorter = new Sorter();
         String sorted = "";
