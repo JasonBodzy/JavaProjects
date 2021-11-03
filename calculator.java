@@ -67,7 +67,7 @@ public class calculator {
                         if(secondDouble != 0) {
                             System.out.println(firstDouble / secondDouble);
                         }else {
-                            System.out.println("Error, cannot divide by 0");
+                            System.out.println("Error, cannot divide by 0"); //Divide by 0
                         }
                         break;
                     case "*":
