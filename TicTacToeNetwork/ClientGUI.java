@@ -28,7 +28,6 @@ public class ClientGUI extends JComponent implements Runnable {
                 System.out.println(e.getX() + "," + e.getY());
                 processClick(e.getX(), e.getY());
 
-                drawBoard(client.);
             }
 
             @Override
@@ -58,7 +57,7 @@ public class ClientGUI extends JComponent implements Runnable {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                drawBoard(gameManager.getBoard());
+
             }
         });
     }
@@ -66,7 +65,6 @@ public class ClientGUI extends JComponent implements Runnable {
 
     public void paintComponent(Graphics g) {
         if (image == null) {
-            System.out.println("instantiation");
             image = createImage(getWidth(), getHeight());
 
             graphics2D = (Graphics2D) image.getGraphics();
@@ -95,7 +93,7 @@ public class ClientGUI extends JComponent implements Runnable {
     }
 
     public void processClick(int x, int y) {
-
+        drawBoard(client.getGameManager().getBoard());
     }
 
     public void drawX(int index) {
@@ -169,9 +167,6 @@ public class ClientGUI extends JComponent implements Runnable {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new ClientGUI());
         client.setup();
-
-
     }
-
 
 }
