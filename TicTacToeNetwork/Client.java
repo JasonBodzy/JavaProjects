@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client extends ClientGUI implements Runnable {
 
@@ -11,6 +12,9 @@ public class Client extends ClientGUI implements Runnable {
     private GameManager gameManager = new GameManager();
 
     ClientGUI clientGUI = new ClientGUI();
+    public GameManager getGameManager() {
+        return this.gameManager;
+    }
 
     private static Socket connectToServer() {
         try {
@@ -24,13 +28,11 @@ public class Client extends ClientGUI implements Runnable {
     }
 
     private void protocol() {
-
         try {
             BufferedReader clientReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter clientWriter = new PrintWriter(clientSocket.getOutputStream());
-            System.out.println(clientReader.readLine());
-            System.out.println("Player ");
-            myClientGUI.drawBoard(gameManager.getBoard());
+            String playerNum = clientReader.readLine();
+            System.out.println("Player " + playerNum);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,25 +40,11 @@ public class Client extends ClientGUI implements Runnable {
 
     }
 
-
-    public void run() {
-
-    }
-
     public void setup() {
         clientSocket = connectToServer();
-        Client client = new Client();
-        client.protocol();
+        protocol();
         SwingUtilities.invokeLater(new Client());
     }
-
-    public static void main(String[] args) {
-        clientSocket = connectToServer();
-        Client client = new Client();
-        client.protocol();
-        SwingUtilities.invokeLater(new Client());
-    }
-
 
 
 
