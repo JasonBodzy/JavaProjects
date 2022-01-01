@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -13,12 +14,6 @@ public class ClientGUI extends JComponent implements Runnable {
     private Image image;
     ClientGUI myClientGUI;
 
-    private char[][] board;
-    private int playerNum;
-
-    private static Socket clientSocket;
-    private GameManager gameManager = new GameManager();
-
     static Client client = new Client();
 
     public ClientGUI() {
@@ -27,7 +22,6 @@ public class ClientGUI extends JComponent implements Runnable {
             public void mouseClicked(MouseEvent e) {
                 System.out.println(e.getX() + "," + e.getY());
                 processClick(e.getX(), e.getY());
-
             }
 
             @Override
@@ -93,7 +87,33 @@ public class ClientGUI extends JComponent implements Runnable {
     }
 
     public void processClick(int x, int y) {
-        drawBoard(client.getGameManager().getBoard());
+        int row = -1;
+        int column = -1;
+        if (x >=  0 && x <= 100) {
+            column = 0;
+        }
+        if (x > 100 && x <= 200) {
+            column = 1;
+        }
+
+        if (x > 200 && x <= 300) {
+            column = 2;
+        }
+
+        if (y >= 0 && y <= 100) {
+            row = 0;
+        }
+
+        if (y > 100 && y <= 200) {
+            row = 1;
+        }
+
+        if (y > 200 && y <= 300) {
+            row = 2;
+        }
+
+        client.setRowAndColumn(row, column);
+        drawBoard(client.getBoard());
     }
 
     public void drawX(int index) {
