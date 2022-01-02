@@ -20,7 +20,6 @@ public class ClientGUI extends JComponent implements Runnable {
         addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(e.getX() + "," + e.getY());
                 processClick(e.getX(), e.getY());
             }
 
@@ -56,7 +55,10 @@ public class ClientGUI extends JComponent implements Runnable {
         });
     }
 
-
+    public void draw() {
+        drawBoard(client.getBoard());
+        repaint();
+    }
     public void paintComponent(Graphics g) {
         if (image == null) {
             image = createImage(getWidth(), getHeight());
@@ -84,20 +86,27 @@ public class ClientGUI extends JComponent implements Runnable {
         g.drawLine(0, 100, 300, 100);
         g.drawLine(0, 200, 300, 200);
 
+        draw();
+
     }
 
     public void processClick(int x, int y) {
         int row = -1;
         int column = -1;
+
+        int base = 0;
+
         if (x >=  0 && x <= 100) {
             column = 0;
         }
         if (x > 100 && x <= 200) {
             column = 1;
+            base++;
         }
 
         if (x > 200 && x <= 300) {
             column = 2;
+            base += 2;
         }
 
         if (y >= 0 && y <= 100) {
@@ -106,13 +115,26 @@ public class ClientGUI extends JComponent implements Runnable {
 
         if (y > 100 && y <= 200) {
             row = 1;
+            base += 3;
         }
 
         if (y > 200 && y <= 300) {
             row = 2;
+            base += 6;
         }
 
         client.setRowAndColumn(row, column);
+
+
+        if (client.getCurrentMove() == client.getPlayerNumber()) {
+            if (client.getCharacter() == 'x') {
+                drawX(base);
+            } else if (client.getCharacter() == 'o') {
+                drawO(base);
+            }
+        }
+
+
         drawBoard(client.getBoard());
     }
 
