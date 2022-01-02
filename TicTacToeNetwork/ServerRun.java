@@ -6,7 +6,9 @@ import java.net.Socket;
 
 public class ServerRun {
 
+
     public static void main(String[] args) {
+        GameManager gameManager = new GameManager();
         ServerSocket serverSocket = null;
         Socket socket = null;
         try {
@@ -21,7 +23,7 @@ public class ServerRun {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            new EchoThreadServer(socket, i).start();
+            new EchoThreadServer(socket, i, gameManager).start();
         }
 
 
