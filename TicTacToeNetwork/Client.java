@@ -10,6 +10,8 @@ public class Client {
 
     private static Socket clientSocket;
     private int playerNumber;
+    private char character;
+    private int currentMove;
 
     private int row = -1;
     private int column = -1;
@@ -27,6 +29,18 @@ public class Client {
         return this.board;
     }
 
+    public char getCharacter() {
+        return this.character;
+    }
+
+    public int getPlayerNumber() {
+        return this.playerNumber;
+    }
+
+    public int getCurrentMove() {
+        return this.currentMove;
+    }
+
     private static Socket connectToServer() {
         try {
             clientSocket = new Socket("localhost", 4242);
@@ -38,12 +52,24 @@ public class Client {
         return clientSocket;
     }
 
+    private void readBoardString(BufferedReader clientReader) throws Exception {
+        //Read BoardString
+        int tracker = 0;
+        String boardString = clientReader.readLine();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = boardString.charAt(tracker);
+                tracker++;
+            }
+        }
+    }
+
     private void protocol() {
         try {
 
             BufferedReader clientReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter clientWriter = new PrintWriter(clientSocket.getOutputStream());
-            char character = ' ';
+            character = ' ';
             String playerNum = clientReader.readLine();
             playerNumber = Integer.parseInt(playerNum);
             System.out.println("Player " + playerNumber);
@@ -59,32 +85,31 @@ public class Client {
             do {
                 //Read winner
                 winner = Integer.parseInt(clientReader.readLine());
+                // Read board string
+                readBoardString(clientReader);
                 //Read current move
-                int currentMove = Integer.parseInt(clientReader.readLine());
+                currentMove = Integer.parseInt(clientReader.readLine());
+                //While not current move
+                while(playerNumber != currentMove) {
+                    clientWriter.write("pass");
+                    clientWriter.println();
+                    clientWriter.flush();
+                    winner = Integer.parseInt(clientReader.readLine());
+                    readBoardString(clientReader);
+                    currentMove = Integer.parseInt(clientReader.readLine());
+                }
                 //Write new Move
                 if (currentMove == playerNumber) {
-                    if (row == -1 && column == -1) {
-                        clientWriter.write(2 + "" + 2 + "" + "x");
+                    while (row == -1 && column == -1) {
+                        clientWriter.write("null");
                         clientWriter.println();
                         clientWriter.flush();
-                    } else {
-                        System.out.println("Writing move string");
-                        clientWriter.write(row + "" + column + "" + character);
-                        clientWriter.println();
-                        clientWriter.flush();
-                        row = -1;
-                        column = -1;
-
-                        //Read Board
-                        int tracker = 0;
-                        String boardString = clientReader.readLine();
-                        for (int i = 0; i < board.length; i++) {
-                            for (int j = 0; j < board[i].length; j++) {
-                                board[i][j] = boardString.charAt(tracker);
-                                tracker++;
-                            }
-                        }
                     }
+                    clientWriter.write(row + "" + column + "" + character);
+                    clientWriter.println();
+                    clientWriter.flush();
+                    row = -1;
+                    column = -1;
                 }
 
             } while (winner == 0);
