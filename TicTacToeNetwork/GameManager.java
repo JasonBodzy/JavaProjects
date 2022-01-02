@@ -3,8 +3,8 @@ public class GameManager {
     private int currentMove = 1;
 
     GameManager() {
-        this.board = new char[][]{{'-', '-', 'o'},
-                                  {'-', 'x', '-'},
+        this.board = new char[][]{{'-', '-', '-'},
+                                  {'-', '-', '-'},
                                   {'-', '-', '-'}};
     }
 
@@ -12,11 +12,15 @@ public class GameManager {
         return this.board;
     }
 
-    private int getCurrentMove() {
+    public int getCurrentMove() {
         return this.currentMove;
     }
 
-    private void updateBoard(int row, int column, char c) {
+    public synchronized void updateBoard(String moveString) {
+        int row = Integer.parseInt(moveString.substring(0,1));
+        int column = Integer.parseInt(moveString.substring(1,2));
+        char c = (moveString.charAt(2));
+
         this.board[row][column] = c;
 
         if (this.currentMove == 1) {
@@ -28,75 +32,87 @@ public class GameManager {
 
     }
 
-    private int determineWinner() {
-
+    public int determineWinner() {
         // Horizontal Wins
-
-        if (this.getBoard()[0][0] == this.getBoard()[0][1] && this.getBoard()[0][0] == this.getBoard()[0][2]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[0][0] != '-') {
+            if (this.getBoard()[0][0] == this.getBoard()[0][1] && this.getBoard()[0][0] == this.getBoard()[0][2]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
+            }
+        }
+        if (this.getBoard()[1][0] != '-') {
+            if (this.getBoard()[1][0] == this.getBoard()[1][1] && this.getBoard()[1][0] == this.getBoard()[1][2]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
-        if (this.getBoard()[1][0] == this.getBoard()[1][1] && this.getBoard()[1][0] == this.getBoard()[1][2]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
-            }
-        }
-
-        if (this.getBoard()[2][0] == this.getBoard()[2][1] && this.getBoard()[2][0] == this.getBoard()[2][2]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[2][0] != '-') {
+            if (this.getBoard()[2][0] == this.getBoard()[2][1] && this.getBoard()[2][0] == this.getBoard()[2][2]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
         // Vertical Wins
 
-        if (this.getBoard()[0][0] == this.getBoard()[1][0] && this.getBoard()[0][0] == this.getBoard()[2][0]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[0][0] != '-') {
+            if (this.getBoard()[0][0] == this.getBoard()[1][0] && this.getBoard()[0][0] == this.getBoard()[2][0]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
-        if (this.getBoard()[0][1] == this.getBoard()[1][1] && this.getBoard()[0][1] == this.getBoard()[2][1]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[0][1] != '-') {
+            if (this.getBoard()[0][1] == this.getBoard()[1][1] && this.getBoard()[0][1] == this.getBoard()[2][1]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
-        if (this.getBoard()[0][2] == this.getBoard()[1][2] && this.getBoard()[0][2] == this.getBoard()[2][2]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[0][2] != '-') {
+            if (this.getBoard()[0][2] == this.getBoard()[1][2] && this.getBoard()[0][2] == this.getBoard()[2][2]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
         // Diagonal Wins
-
-        if (this.getBoard()[0][0] == this.getBoard()[1][1] && this.getBoard()[0][0] == this.getBoard()[2][2]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[0][0] != '-') {
+            if (this.getBoard()[0][0] == this.getBoard()[1][1] && this.getBoard()[0][0] == this.getBoard()[2][2]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
-        if (this.getBoard()[0][2] == this.getBoard()[1][1] && this.getBoard()[0][2] == this.getBoard()[2][0]) {
-            if (this.currentMove == 2) {
-                return 1;
-            } else if (this.currentMove == 1) {
-                return 2;
+        if (this.getBoard()[0][2] != '-') {
+            if (this.getBoard()[0][2] == this.getBoard()[1][1] && this.getBoard()[0][2] == this.getBoard()[2][0]) {
+                if (this.currentMove == 2) {
+                    return 1;
+                } else if (this.currentMove == 1) {
+                    return 2;
+                }
             }
         }
 
